@@ -14,14 +14,14 @@ public class SubarraysDivByK {
             nums[i] = sc.nextInt();
         }
 
-        // HashMap to store remainder frequencies
-        HashMap<Integer, Integer> remainderCount = new HashMap<>();
-        remainderCount.put(0, 1); // prefix sum divisible by k initially
+        // Array to store remainder frequencies
+        int[] remainderCount = new int[k];
+        remainderCount[0] = 1; // prefix sum divisible by k
 
         int prefixSum = 0;
         int count = 0;
 
-        // TODO: Count subarrays with sum divisible by k
+        // TODO: Count subarrays divisible by k
         for (int num : nums) {
             prefixSum += num;
             int remainder = prefixSum % k;
@@ -31,11 +31,8 @@ public class SubarraysDivByK {
                 remainder += k;
             }
 
-            if (remainderCount.containsKey(remainder)) {
-                count += remainderCount.get(remainder);
-            }
-
-            remainderCount.put(remainder, remainderCount.getOrDefault(remainder, 0) + 1);
+            count += remainderCount[remainder];
+            remainderCount[remainder]++;
         }
 
         // TODO: Print result
